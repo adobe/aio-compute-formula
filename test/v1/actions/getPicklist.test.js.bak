@@ -1,0 +1,44 @@
+const {validateSchema} = require('../../../lib/actionUtils')
+const { Core } = require('@adobe/aio-sdk')
+
+const {main} = require('../../../actions/flow/v1/getPicklist')
+const {choice} = require('../../../actions/flow/v1/getPicklist/choices')
+const {actionPrefix} = require('../../../lib/constants')
+const {rfReq, unitReq, dateReq} = require("../../mocks/mockGetPicklistRequest")
+
+describe('getPicklist local', () =>{
+    const logger = Core.Logger('main', 'debug' )
+    test('test operation choices', async () => {
+        var opParams = {
+            "name": "operation",
+            "LOG_LEVEL": "debug",
+        }
+        var resp = await main(opParams)
+        console.log(resp)
+        expect(resp.body.choices).toContainEqual(await choice("Add", "add", null, logger))
+        expect(resp.body.choices).toContainEqual(await choice("Subtract", "subtract", null, logger))
+    })
+    test('rfChoices', async () => {
+        var resp = await main(rfReq);
+        console.log(resp)
+        expect(resp.body.choices[0].displayValue.en_US).toEqual("countryCode2");
+        expect(resp.body.choices[0].submittedValue).toEqual("countryCode2");
+    })
+    test('unitChoices', async () => {
+        var resp = await main(unitReq);
+        console.log(resp)
+        expect(resp.body.choices).toContainEqual(await choice("Years", "years", null, logger))
+        expect(resp.body.choices).toContainEqual(await choice("Months", "months", null, logger))
+        expect(resp.body.choices).toContainEqual(await choice("Minutes", "minutes", null, logger))
+        expect(resp.body.choices).toContainEqual(await choice("Seconds", "seconds", null, logger))
+        expect(resp.body.choices).toContainEqual(await choice("Hours", "hours", null, logger))
+        expect(resp.body.choices).toContainEqual(await choice("Days", "days", null, logger))
+
+    })
+    test('dateChoices', async () => {
+        var resp = await main(dateReq);
+        console.log(JSON.stringify(resp))
+        expect(resp.body.choices[0].displayValue.en_US).toContainEqual("country");
+        expect(resp.body.choices[0].submittedValue).toContainEqual("country");
+    })
+})

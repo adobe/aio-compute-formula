@@ -1,0 +1,16 @@
+const {mockSingleLead} = require("../../mocks/mockAsyncRequest");
+const {validateSchema} = require('../../../lib/actionUtils');
+const {reqSchemaKey} = require("../../../actions/flow/v1/submitAsyncAction");
+const {main} = require("../../../actions/flow/v1/submitAsyncAction")
+
+
+describe('async test', () => {
+    test('simple submit', async () =>{
+
+        var resp = await main(mockSingleLead);
+        console.log(resp)
+        console.log(resp.body)
+        console.log(resp.body.error)
+        expect(resp.statusCode).toEqual(201)
+    })
+})

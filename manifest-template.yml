@@ -1,0 +1,71 @@
+packages:
+  __APP_PACKAGE__:
+    license: Apache-2.0
+    actions:
+      getServiceDefinition:
+        function: actions\flow\v1\getServiceDefinition\index.js
+        web: 'yes'
+        runtime: 'nodejs:14'
+        inputs:
+          LOG_LEVEL: debug
+        annotations:
+          require-whisk-auth: $WSK_AUTH_SECRET
+      submitAsyncAction:
+        function: actions\flow\v1\submitAsyncAction\index.js
+        web: 'yes'
+        runtime: 'nodejs:14'
+        inputs:
+          LOG_LEVEL: debug
+        annotations:
+          require-whisk-auth: $WSK_AUTH_SECRET
+      executeCallback:
+        function: actions\flow\v1\executeCallback\index.js
+        web: 'yes'
+        runtime: 'nodejs:14'
+        inputs:
+          LOG_LEVEL: debug
+        annotations:
+          require-whisk-auth: $WSK_AUTH_SECRET
+      mockCallbackResponse:
+        function: actions\flow\v1\mockCallbackResponse\index.js
+        web: 'yes'
+        runtime: 'nodejs:14'
+        inputs:
+          LOG_LEVEL: debug
+        annotations:
+          require-whisk-auth: $WSK_AUTH_SECRET
+      serviceSwagger:
+          function: actions\flow\v1\openapi\index.js
+          web: 'yes'
+          runtime: 'nodejs:14'
+          inputs:
+            LOG_LEVEL: debug
+      status:
+          function: actions\flow\v1\status\index.js
+          web: 'yes'
+          runtime: 'nodejs:14'
+          inputs:
+            LOG_LEVEL: debug
+          annotations:
+            require-whisk-auth: $WSK_AUTH_SECRET
+      getPicklist:
+          function: actions\flow\v1\getPicklist\index.js
+          web: 'yes'
+          runtime: 'nodejs:14'
+          inputs:
+            LOG_LEVEL: debug
+          annotations:
+            require-whisk-auth: $WSK_AUTH_SECRET
+      # brandIcon:
+      #     function: actions\flow\v1\brandIcon\index.js
+      #     web: 'yes'
+      #     runtime: 'nodejs:14'
+      #     inputs:
+      #       LOG_LEVEL: debug
+      # serviceIcon:
+      #     function: actions\flow\v1\serviceIcon\index.js
+      #     web: 'yes'
+      #     runtime: 'nodejs:14'
+      #     inputs:
+      #       LOG_LEVEL: debug
+

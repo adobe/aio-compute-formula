@@ -1,6 +1,6 @@
 const { Core } = require('@adobe/aio-sdk')
 const { errorResponse, getBearerToken, stringParameters, checkMissingRequestInputs, handleFNF, validateSchema } = require('../../../../lib/actionUtils')
-const {operationChoices, unitChoices, logChoices, logLvlChoices, rfChoices, dateChoices, monthChoices} = require('./choices')
+const { logChoices, logLvlChoices, rfChoices, } = require('./choices')
 
 const actionName = "getPicklist";
 
@@ -23,15 +23,6 @@ async function main(params){
     var choices;
     try {
         logger.debug(`Trying to get choices for field: ${params.name}`)
-        if(params.name === "operation"){
-            choices = await operationChoices(logger)
-        }
-        if(params.name === "dateField"){
-            choices = await dateChoices(params.fieldMappingContext, logger)
-        }
-        if(params.name == "unit"){
-            choices = await unitChoices(logger)
-        }
         if(params.name == "returnField"){
             choices = await rfChoices(params.fieldMappingContext, logger)
         }
@@ -40,9 +31,6 @@ async function main(params){
         }
         if(params.name.toLowerCase() === "log_level"){
             choices = await logLvlChoices(logger);
-        }
-        if(params.name.toLowerCase() === "overridemonth"){
-            choices = await monthChoices(logger)
         }
         logger.debug(`Choices: ${JSON.stringify(choices)}`)
     } catch (error) {

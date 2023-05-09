@@ -17,7 +17,6 @@ describe('executeCallback e2e test', () => {
 
         var headers = {"Content-Type": "application/json", "X-OW-EXTRA-LOGGING": "on"};
         var key = fetchKey("./manifest.yml")
-        console.log("key: ", key)
         addAuthHeaders(headers, key)
         var res = await fetch(actionUrl, {"headers": headers, body: JSON.stringify(mockSingleLead), method: "POST"})
         console.log(res);
@@ -28,19 +27,5 @@ describe('executeCallback e2e test', () => {
         console.log(JSON.stringify(json))
         expect(json.objectData[0].leadData).toEqual(expect.objectContaining({"datetime_c": expectedDt}))
     })
-    test('Test overrides', async () => {
-        const expectedDt = "2024-01-01T01:01:01Z"
-        var headers = {"Content-Type": "application/json", "X-OW-EXTRA-LOGGING": "on"};
-        var key = fetchKey("./manifest.yml")
-        console.log("key: ", key)
-        addAuthHeaders(headers, key)
-        var res = await fetch(actionUrl, {"headers": headers, body: JSON.stringify(mockSingleLeadOverrides), method: "POST"})
-        console.log(res);
-        if(res.status > 201){
-            console.log("init error: ", await getInitializationError(res.headers.get('x-openwhisk-activation-id')))
-        }
-        var json = await res.json();
-        console.log(JSON.stringify(json))
-        expect(json.objectData[0].leadData).toEqual(expect.objectContaining({"datetime_c": expectedDt}))
-    })
+
 })

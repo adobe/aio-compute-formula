@@ -40,7 +40,7 @@ async function main(params) {
 
             try {
                 var computedVal;
-                if (l.flowStepContext.formula != null && l.flowStepContext.returnField !=  null) {
+                if (l.flowStepContext.formula != null && l.flowStepContext.returnField != null) {
                     computedVal = computeFormula(parser, l.flowStepContext.formula).result
                 }
                 // result.leadData[l.flowStepContext.returnField] = dateResult.toISOString().split(".")[0] + offset;
@@ -68,13 +68,8 @@ async function main(params) {
 
     var cbRes;
     try {
-        var callbackUrl;
-        callbackUrl = params.callbackUrl;
-        var ioApiKey;
-        ioApiKey = params.apiCallBackKey;
-
-
-
+        var callbackUrl = params.callbackUrl;
+        var ioApiKey = params.apiCallBackKey;
 
         var headers = {
             "Content-Type": "application/json",
@@ -87,19 +82,18 @@ async function main(params) {
             // "x-api-key": params.token,
         }
         logger.info(JSON.stringify(headers))
-        if (!params._isTest || params._isTest == null) {
-            logger.info(JSON.stringify(cbData))
-            cbRes = await fetch(callbackUrl, { body: JSON.stringify(cbData), headers: headers, method: "POST" })
-            var json = await cbRes.json();
-            logger.info(JSON.stringify(json));
-            logger.info(`CB Status: ${cbRes.status} ${cbRes.statusText}`)
-            try {
-                logger.info(`Callback Response JSON: ${JSON.stringify(json)}`);
-            } catch (error) {
-                logger.info("Caught error after invoking callback: ", error)
-                return errorResponse(500, error, logger)
-            }
+        logger.info(JSON.stringify(cbData))
+        cbRes = await fetch(callbackUrl, { body: JSON.stringify(cbData), headers: headers, method: "POST" })
+        var json = await cbRes.json();
+        logger.info(JSON.stringify(json));
+        logger.info(`CB Status: ${cbRes.status} ${cbRes.statusText}`)
+        try {
+            logger.info(`Callback Response JSON: ${JSON.stringify(json)}`);
+        } catch (error) {
+            logger.info("Caught error after invoking callback: ", error)
+            return errorResponse(500, error, logger)
         }
+
 
     } catch (error) {
         logger.info("Caught an unknown error: ", error);
@@ -113,48 +107,48 @@ async function main(params) {
 }
 
 const FORMULA_ERROR_STRINGS = {
-    "#ERROR!"   : "Could not compute formula",
-    "#DIV/0!"   : "Formula tried to perform division by zero",
-    "#NAME?"    : "Function name not recognized",
-    "#N/A"      : "A value was missing from the formula",
-    "#NUM!"     : "Invalid number in formula",
-    "#VALUE!"   : "An argument in the formula is of the wrong type"
+    "#ERROR!": "Could not compute formula",
+    "#DIV/0!": "Formula tried to perform division by zero",
+    "#NAME?": "Function name not recognized",
+    "#N/A": "A value was missing from the formula",
+    "#NUM!": "Invalid number in formula",
+    "#VALUE!": "An argument in the formula is of the wrong type"
 }
 
-function computeFormula(parser, formula){
+function computeFormula(parser, formula) {
     var resultObj = parser.parse(formula);
     var computedResult = {
     };
-    if(resultObj.error != null){
+    if (resultObj.error != null) {
         console.error("Computed formula '" + formula + "' threw error " + resultObj.error);
         throw new friendlyError(resultObj.error, formula);
-    }else{
+    } else {
         computedResult.result = resultObj.result;
         return computedResult;
     }
 }
 
-function friendlyError(errStr, formula){
+function friendlyError(errStr, formula) {
     var err = {};
-    
-    if (FORMULA_ERROR_STRINGS[errStr]){
+
+    if (FORMULA_ERROR_STRINGS[errStr]) {
         err.message = FORMULA_ERROR_STRINGS[errStr];
-    }else{
+    } else {
         err.message = "Unknown error occurred";
     }
     err.formula = formula;
     return err;
 }
 
-function leadFormulaResult(leadId, targetField, result){
+function leadFormulaResult(leadId, targetField, result) {
     var lfr = {
         "leadId": leadId
     }
-    if(result.error != null){
+    if (result.error != null) {
         lfr.success = false;
         lfr.error = result.error;
         return lfr;
-    }else{
+    } else {
         lfr[targetField] = result.result;
         lfr.success = true;
         return lfr;

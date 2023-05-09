@@ -1,7 +1,7 @@
 const {sumScoreReq, sumNegReq, compScoreReq, arithmeticStrReq, substituteTxtReq, tolowerReq, toUpperReq, toProperReq} = require("../../mocks/mockAsyncRequest");
-const {validateSchema} = require('../../../lib/actionUtils');
 const {main, computeFormula} = require("../../../actions/flow/v1/executeCallback");
 const FormulaParser = require('hot-formula-parser').Parser;
+
 
 describe('basic formula tests', () => {
     const parser = new FormulaParser();

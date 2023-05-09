@@ -40,7 +40,7 @@ async function main(params) {
             blocking: false,
             result: false,
             params: {
-                "message": error,
+                "message": "logging params",
                 "params": params
             },
             headers: { "X-OW-EXTRA-LOGGING": "on" }

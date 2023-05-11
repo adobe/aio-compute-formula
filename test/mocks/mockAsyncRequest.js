@@ -23,7 +23,8 @@ var mockSingleLead = {
             "prefix": "marketob2"
         },
         "admin": {
-            "foo": "bar"
+            "foo": "bar",
+            "LOG_LEVEL": "debug"
         },
         "campaign": {
             "id": 1001,
@@ -52,39 +53,36 @@ var mockSingleLead = {
     ]
 }
 
-// var sumScoreReq = {};
-// Object.assign(sumScoreReq, mockSingleLead)
-// 
-// sumScoreReq._expectedValue = 3;
-var sumScoreReq = Object.assign(mockSingleLead, {} )
+
+let sumScoreReq = Object.assign(mockSingleLead, {} )
 sumScoreReq.objectData[0].flowStepContext.formula = "SUM(1,2)"
 sumScoreReq._expectedValue = 3
 
-var sumNegReq = Object.assign(mockSingleLead, {} )
+let sumNegReq = Object.assign(mockSingleLead, {} )
 sumNegReq.objectData[0].flowStepContext.formula = "SUM(1,-2)"
 sumNegReq._expectedValue = -1
 
-var compScoreReq = Object.assign(mockSingleLead, {} )
+let compScoreReq = Object.assign(mockSingleLead, {} )
 compScoreReq.objectData[0].flowStepContext.formula = "SUM(PRODUCT(1, .8), PRODUCT(-1, 1.7))"
 compScoreReq._expectedValue = -0.9
 
-var arithmeticStrReq = Object.assign(mockSingleLead, {} )
+let arithmeticStrReq = Object.assign(mockSingleLead, {} )
 arithmeticStrReq.objectData[0].flowStepContext.formula = "1 + -2"
 arithmeticStrReq._expectedValue = -1
 
-var substituteTxtReq = Object.assign(mockSingleLead, {} )
+let substituteTxtReq = Object.assign(mockSingleLead, {} )
 substituteTxtReq.objectData[0].flowStepContext.formula = `SUBSTITUTE("You're a wizard, Harry!", "wizard", "witch")`
 substituteTxtReq._expectedValue = "You're a witch, Harry!"
 
-var tolowerReq = Object.assign(mockSingleLead, {} )
+let tolowerReq = Object.assign(mockSingleLead, {} )
 tolowerReq.objectData[0].flowStepContext.formula = `LOWER("LOWERCASE")`
 tolowerReq._expectedValue = "lowercase"
 
-var toUpperReq = Object.assign(mockSingleLead, {} )
+let toUpperReq = Object.assign(mockSingleLead, {} )
 toUpperReq.objectData[0].flowStepContext.formula = `UPPER("uppercase")`
 toUpperReq._expectedValue = "UPPERCASE"
 
-var toProperReq = Object.assign(mockSingleLead, {} )
+let toProperReq = Object.assign(mockSingleLead, {} )
 toProperReq.objectData[0].flowStepContext.formula = `PROPER("estados unidos")`
 toProperReq._expectedValue = "Estados Unidos"
 

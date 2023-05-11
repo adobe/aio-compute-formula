@@ -2,7 +2,7 @@ const { Config } = require('@adobe/aio-sdk').Core
 const fs = require('fs')
 const fetch = require('node-fetch')
 const { uploadUrl, actionPrefix } = require('../../../lib/constants');
-const { mockSingleLead } = require("../../../test/mocks/mockAsyncRequest");
+const {sumScoreReq} =  require("../../../test/mocks/mockAsyncRequest")
 const { addAuthHeaders, getInitializationError } = require("../../../test/lib/testUtils")
 const {fetchKey} = require("../../../scripts/manifest.js")
 
@@ -18,16 +18,12 @@ describe('submitAsyncAction e2e test', () => {
         var key = fetchKey("./manifest.yml")
         addAuthHeaders(headers, key)
         // console.log(headers)
-        var res = await fetch(actionUrl, { headers: headers, body: JSON.stringify(mockSingleLead), method: "POST" })
+        var res = await fetch(actionUrl, { headers: headers, body: JSON.stringify(sumScoreReq), method: "POST" })
         console.log(res.headers);
+        console.log("response: ", JSON.stringify(res))
         //get callback activation id
-        cbActId = await res.headers.get("X-CB-Activation-Id");
-        // console.log("cb act id: ", cbActId)
-        // console.log(res);
-        // console.log(await res.text())
-        var json = await res.json();
-        console.log(json);
-        console.log(await getInitializationError(cbActId))
+        // cbActId = await res.headers.get("X-CB-Activation-Id");
+        // console.log("initialization error: ", await getInitializationError(cbActId))
         expect(res).toEqual(expect.objectContaining({ status: 201 }))
 
     })

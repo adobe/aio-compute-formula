@@ -10,8 +10,8 @@ const cbActionName = require('../executeCallback').actionName;
 var openwhisk = require('openwhisk');
 
 async function main(params) {
-    const logger = Core.Logger('main', { level: params.context.admin.LOG_LEVEL || 'debug' })
-
+    // const logger = Core.Logger('main', { level: params.context.admin.LOG_LEVEL || 'debug' })
+    const logger = Core.Logger('main', { level: 'debug' })
     // 'info' is the default level if not set
     logger.debug('Calling the main action')
 

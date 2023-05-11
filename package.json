@@ -19,6 +19,7 @@
     "scripts": {
         "test": "jest --passWithNoTests ./test",
         "e2e": "jest --collectCoverage=false --maxConcurrency=1 --maxWorkers=1 --testRegex ./e2e/actions/",
+        "async": "jest --collectCoverage=false --maxConcurrency=1 --maxWorkers=1 --testRegex ./e2e/actions/flow/submitAsyncAction.test.js",
         "render-manifest": "node ./scripts/renderManifest.js",
         "test-man": "jest --passWithNoTests ./test/scripts/manifest.test.js"
     },

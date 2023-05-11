@@ -2,7 +2,7 @@
 const fs = require('fs')
 const fetch = require('node-fetch')
 const { uploadUrl, actionPrefix } = require('../../../lib/constants');
-const { monthsReq } = require('../../../test/mocks/mockGetPicklistRequest')
+const { rfReq } = require('../../../test/mocks/mockGetPicklistRequest')
 const { addAuthHeaders, getInitializationError } = require("../../../test/lib/testUtils")
 const {fetchKey} = require("../../../scripts/manifest.js")
 
@@ -17,7 +17,7 @@ describe('getPicklist e2e test', () => {
     var key = fetchKey("./manifest.yml")
     addAuthHeaders(headers, key)
     test('months test', async () => {
-        var res = await fetch(actionUrl, { method: "POST", body: JSON.stringify(monthsReq), headers: headers });
+        var res = await fetch(actionUrl, { method: "POST", body: JSON.stringify(rfReq), headers: headers });
         if (res.status >= 400) {
             console.log(await getInitializationError(res.headers.get('x-openwhisk-activation-id')))
         }

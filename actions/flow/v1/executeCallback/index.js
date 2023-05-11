@@ -9,7 +9,8 @@ const FormulaParser = require('hot-formula-parser').Parser;
 
 
 async function main(params) {
-    const logger = Core.Logger('main', { level: params.context.admin.LOG_LEVEL || 'debug' })
+    // const logger = Core.Logger('main', { level: params.context.admin.LOG_LEVEL || 'debug' })
+    const logger = Core.Logger('main', { level: 'debug' })
 
     logger.info('Calling the main action')
 

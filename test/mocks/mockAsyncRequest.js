@@ -47,7 +47,7 @@ var mockSingleLead = {
             "flowStepContext": {
                 //date, operation, returnField, unit, amount
                 "formula": "",
-                "returnField": "testString"
+                "returnString": "testString"
             }
         }
     ]

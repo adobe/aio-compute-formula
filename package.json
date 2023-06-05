@@ -1,5 +1,5 @@
 {
-    "name": "mkto-date-math",
+    "name": "aio-flow-compute",
     "description": "Proof-of-concept implementation of Marketo Self-Service Flow Steps built as a Project Firefly application.",
     "version": "0.0.1",
     "private": true,

@@ -41,13 +41,24 @@ async function main(params) {
 
             try {
                 var computedVal;
-                if (l.flowStepContext.formula != null && l.flowStepContext.returnField != null) {
+                if (l.flowStepContext.formula != null && (l.flowStepContext.returnString != null || l.flowStepContext.returnNum)) {
                     computedVal = computeFormula(parser, l.flowStepContext.formula).result
                 }
                 // result.leadData[l.flowStepContext.returnField] = dateResult.toISOString().split(".")[0] + offset;
                 result.leadData["id"] = l.objectContext.id;
-                result.leadData[l.flowStepContext.returnField] = computedVal;
-                result.activityData["returnFieldName"] = l.flowStepContext.returnField;
+                if (l.flowStepContext.returnString != null && l.flowStepContext.returnString.length > 0) {
+                    result.leadData[l.flowStepContext.returnString] = computedVal;
+
+                }
+                if (l.flowStepContext.returnNum != null) {
+                    // result.leadData[l.flowStepContext.returnNum] = Number(computedVal)
+                    result.leadData[l.flowStepContext.returnNum] = "" + computedVal
+
+                }
+                result.activityData["returnFieldName"] = l.flowStepContext.returnString || l.flowStepContext.returnNum;
+                result.activityData["returnVal"] = computedVal
+                result.activityData["computedFormula"] = l.flowStepContext.formula
+
                 objectData.push(result)
             } catch (error) {
                 logger.info(error)

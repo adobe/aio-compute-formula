@@ -1,28 +1,21 @@
-//const {actionPrefix} = require("../../../lib/constants.js")
-///208192-239blackgazelle-stage/mkto-date-math-0.0.1/serviceSwagger
-//`https://${namespace}.${hostname}/api/v1/web/${runtimePackage}`
-
-
-
 module.exports = {
   swagger: function (host) {
     return {
       "openapi": "3.0.1",
       "info": {
-        "title": "Date Math",
+        "title": "Compute Formula",
         "x-providerName": "Adobe Marketo Engage",
         "description": "This document describes the schema used by Marketo Self-Service Flow actions.  By implementing an API conforming to this interface, you can create custom flow actions for use in Marketo Smart Campaigns.  Title will be used to define the service name when ingested in Marketo, while x-providerName should be the name of the organization providing the service.  Use 'version' to indicate the version of your service, use 'x-schemaVersion' to indicate which version of the Service Provider Interface that your service implements.  'servers' may be set if the service host is different from the URL used to access your API definition, if unset the same host will be assumed, values after the first will be ignored.",
+        "termsOfService": "https://documents.marketo.com/legal/eusa/us/2012-08-28/",
         "license": {
           "name": "MIT",
           "url": "/license"
         },
-        "version": "0.3.0",
+        "version": "0.0.1",
         "x-schemaVersion": "0.3.0",
         "x-supportContact": "https://developers.marketo.com"
       },
-      "servers": [
-        host
-      ],
+      // "servers": [host],
       "tags": [
         {
           "name": "flow action",
@@ -32,6 +25,12 @@ module.exports = {
       "security": [
         {
           "apiKey": []
+        },
+        {
+          "oauth2": []
+        },
+        {
+          "basic": []
         }
       ],
       "paths": {
@@ -158,6 +157,60 @@ module.exports = {
             }
           }
         },
+        "/providerInstructions": {
+          "description": "Returns html document to embed how-to instructions for any required configuration which is not covered by automated installation",
+          "get": {
+            "summary": "Returns how-to html",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "content": {
+                  "text/html": {
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        // "/brandIcon": {
+        //   "description": "Returns an icon to represent brand in Service Providers menu",
+        //   "get": {
+        //     "responses": {
+        //       "200": {
+        //         "description": "OK",
+        //         "content": {
+        //           "image/*": {
+        //             "schema": {
+        //               "type": "string",
+        //               "format": "binary"
+        //             }
+        //           }
+        //         }
+        //       }
+        //     }
+        //   }
+        // },
+        // "/serviceIcon": {
+        //   "description": "Returns an icon to represent brand in Smart Campaign Flow Pallette, and in Service Providers menu",
+        //   "get": {
+        //     "responses": {
+        //       "200": {
+        //         "description": "OK",
+        //         "content": {
+        //           "image/*": {
+        //             "schema": {
+        //               "type": "string",
+        //               "format": "binary"
+        //             }
+        //           }
+        //         }
+        //       }
+        //     }
+        //   }
+        // },
         "/getPicklist": {
           "description": "Returns lists of choices for a flow or global parameter.",
           "post": {
@@ -564,7 +617,11 @@ module.exports = {
             "type": "object",
             "required": [
               "apiName",
+              "provider",
               "i18n",
+              "invocationEndpoint",
+              "statusEndpoint",
+              "authSetting",
               "primaryAttribute",
               "invocationPayloadDef",
               "callbackPayloadDef"

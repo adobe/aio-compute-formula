@@ -23,7 +23,10 @@ async function main(params){
     var choices;
     try {
         logger.debug(`Trying to get choices for field: ${params.name}`)
-        if(params.name == "returnField"){
+        if(params.name == "returnString"){
+            choices = await rfChoices(params.fieldMappingContext, logger)
+        }
+        if(params.name == "returnNum"){
             choices = await rfChoices(params.fieldMappingContext, logger)
         }
         if(params.name.toLowerCase() ===  "x-ow-extra-logging"){

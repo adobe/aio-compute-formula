@@ -39,7 +39,6 @@ describe('basic formula tests', () => {
         const original = "You're a wizard, Harry!"
         const toSub = "wizard"
         const subWith = "witch"
-        const instanceNum = 1
         const formula = `SUBSTITUTE("${original}", "${toSub}", "${subWith}")`
         const expectedText = "You're a witch, Harry!"
         expect(computeFormula(parser, formula).result).toEqual(expectedText)
@@ -62,11 +61,22 @@ describe('basic formula tests', () => {
         const formula = `PROPER("${string}")`
         expect(computeFormula(parser, formula)).toHaveProperty("result", expected)
     })
-    //WEEKDAY
 
-    //DATEDIF
-    //Days to MQL, SQL, etc.
-
+    //datedif
+    test('DateDif', async () => {
+        const start = "2023-01-01";
+        const end = "2023-01-28";
+        const formula = `DAYS(${start}, ${end})`
+        const expected = 27;
+        expect(computeFormula(parser, formula)).toHaveProperty("result", expected)
+    })
+    //ROUND(SUM(PRODUCT(3, .3), 20), 0)
+    test('round', async () => {
+        const toRound = "20.9";
+        const expected = 21;
+        const formula = `ROUND(SUM(PRODUCT(3, 0.3), 20), 0)`
+        expect(computeFormula(parser, formula)).toHaveProperty("result", expected)
+    })
     //MOD for round robin assignment
 
 

@@ -35,7 +35,7 @@ local serverless stack and also run your actions locally use the `aio app run --
 
 - in a terminal, navigate to the local folder of this repository
 - use `npm install` to install local dependencies
-- use the `npm run render-manfest <path:'./manifest.yml'> <apiKey> <logLevel>` to render a minfest.yml file from `./manifest-template.yml`.  This allows you to set an api key and define a global log level for all of your actions
+- use the `npm run render-manifest <path:'./manifest.yml'> <apiKey> <logLevel>` to render a minfest.yml file from `./manifest-template.yml`.  This allows you to set an api key and define a global log level for all of your actions
 - use `aio app deploy` to deploy this application
 - In Marketo, Navigate to the admin menu
 - Navigate to the Service Providers menu

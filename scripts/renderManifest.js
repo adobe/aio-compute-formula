@@ -1,9 +1,9 @@
 const {renderManifest} = require("./manifest.js")
 
-const yargs = require('yargs/yargs')(process.argv.slice(2)).argv
+// const yargs = require('yargs/yargs')(process.argv.slice(2)).argv
 
 function main(path, apiKey, logLevel) {
-    console.log(yargs)
+    // console.log(yargs)
     console.log(`render manifest params: path-${path}, key-${apiKey}, log-${logLevel}`)
     renderManifest(path, apiKey, logLevel)
 }

@@ -1,3 +1,12 @@
+/*
+Copyright 2022 Adobe
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file in
+accordance with the terms of the Adobe license agreement accompanying
+it.
+*/
+
 const {sumScoreReq, sumNegReq, compScoreReq, arithmeticStrReq, substituteTxtReq, tolowerReq, toUpperReq, toProperReq} = require("../../mocks/mockAsyncRequest");
 const {main, computeFormula} = require("../../../actions/flow/v1/executeCallback");
 const FormulaParser = require('hot-formula-parser').Parser;

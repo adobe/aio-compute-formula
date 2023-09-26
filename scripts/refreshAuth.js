@@ -1,3 +1,12 @@
+/*
+Copyright 2022 Adobe
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file in
+accordance with the terms of the Adobe license agreement accompanying
+it.
+*/
+
 const fetch = require('node-fetch')
 const { Config } = require('@adobe/aio-sdk').Core
 const tokenEndpoint = "https://ims-na1.adobelogin.com/ims/exchange/jwt"

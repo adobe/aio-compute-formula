@@ -1,3 +1,12 @@
+/*
+Copyright 2022 Adobe
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file in
+accordance with the terms of the Adobe license agreement accompanying
+it.
+*/
+
 const meta = require('../../../resources/v1/CFA-Swagger').swagger
 const swagger = require('../../../resources/v1/svcSwagger').swagger
 const { actionPrefix} = require('../../../lib/constants')
